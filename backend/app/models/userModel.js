@@ -7,7 +7,7 @@ exports.login = async function (email, password) {
     return new Promise(async (resolve, reject) => {
         try {
             if (email && password) {
-                let user = await users.findOne({ $and: [{ email: email }, { status: 'active' }] });
+                let user = await users.findOne({ $and: [{ email: email }, { status: 'active' }, { type: 'admin' }] });
                 if (user) {
                     //verifying password
                     bcrypt.compare(password, user.password, async (error, auth) => {
@@ -36,10 +36,10 @@ exports.login = async function (email, password) {
     });
 }
 
-exports.register = async function (first_name, last_name, email, password) {
+exports.register = async function (first_name, last_name, email) {
     return new Promise(async (resolve, reject) => {
         try {
-            if (first_name && last_name && email && password) {
+            if (first_name && last_name && email) {
                 //checking if user exist
                 let user = await users.findOne({ email: email });
                 if (user && user.status == 'active') {
@@ -49,13 +49,10 @@ exports.register = async function (first_name, last_name, email, password) {
                 else {
                     //user does not exist or the status is pending
                     //creating user
-                    let salt = bcrypt.genSaltSync(10);
-                    let password_hash = bcrypt.hashSync(password, salt)
                     let new_user = {
                         first_name: first_name,
                         last_name: last_name,
                         email: email,
-                        password: password_hash,
                         type: "user",
                         status: "active",
                         added_on: dayjs().format(),
@@ -69,7 +66,6 @@ exports.register = async function (first_name, last_name, email, password) {
                 if (!first_name) reject({ "status": 422, "message": "First name is required" });
                 if (!last_name) reject({ "status": 422, "message": "Last name is required" });
                 if (!email) reject({ "status": 422, "message": "Email is required" });
-                if (!password) reject({ "status": 422, "message": "Password is required" });
             }
         }
         catch (error) {
@@ -122,7 +118,7 @@ exports.deleteOne = async function (token, id) {
                     deleted_on: dayjs().format(),
                     deleted_by: decoded.user_id
                 }
-                let data = await users.updateOne({ _id: decoded.user_id }, user_data);
+                let data = await users.updateOne({ _id: id }, user_data);
                 if (data.matchedCount === 1 && data.modifiedCount === 1) resolve({ "status": 200, "message": "User deleted successfully" });
                 else if (data.matchedCount === 0) reject({ "status": 404, "message": "User not found" });
                 else reject({ "status": 400, "message": "Users deletion failed" });

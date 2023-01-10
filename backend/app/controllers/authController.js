@@ -23,9 +23,8 @@ exports.register = function(req, res)
     let first_name = req.body.first_name;
     let last_name = req.body.last_name;
     let email = req.body.email;
-    let password = req.body.password;
 
-    userModel.register(first_name, last_name, email, password)
+    userModel.register(first_name, last_name, email)
     .then((result)=>{
         let response = success_function(result)
         res.status(result.status).send(response);

@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css');
+
+*{
+    font-family: 'Poppins', sans-serif;
+}
+.text-primary{
+    color: #023E8A !important;
+}
+
+.text-danger{
+    color : #E63946 !important;
+}
+
+.btn-primary{
+    background-color: #023E8A !important;
+}
+
+.btn-outline-primary{
+    border-color: #023E8A !important;
+    color: #023E8A !important;
+}
+
+.btn-outline-primary:hover{
+    background-color: #023E8A !important;
+    border-color: #023E8A !important;
+    color: #ffffff !important;
+}
+
+.font-weight-bolder{
+    font-weight: bolder;
+}
+
+.badge-outline-primary{
+    color: #023E8A;
+    border: 2px solid #023E8A;
+}
+
+.badge-outline-secondary{
+    color: #6c757d;
+    border: 2px solid #6c757d;
+}
+
+.outline-primary{
+    border-color: #023E8A !important;
+}
+
+.border-primary{
+    border-color: #023E8A !important;
+}
+
+.btn-1{
+    max-height: 40px !important;
+}
+
+.h-100-vh{
+    height: 100vh !important;
+}
+
+.login-avatar{
+    max-width: 150px !important;
+    max-height: 150px !important;
+}
+
+.login-div{
+    max-width: 400px !important;
+}
+
+.main{
+  background-color: #f7ffff !important;
+}
