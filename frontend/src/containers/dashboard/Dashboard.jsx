@@ -3,7 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Button from '@mui/material/Button';
+import io from 'socket.io-client';
 import axios from 'axios';
+
+//invoking web-socket connection
+const socket = io.connect(process.env.REACT_APP_BACKEND_URL);
 
 function Dashboard() {
 
@@ -125,6 +129,17 @@ function Dashboard() {
 
   useEffect(() => {
     fetchUsers();
+
+    //listening for updated message from socket
+    socket.on('updated', () => {
+      fetchUsers();
+    });
+
+    return () => {
+      socket.off('connect');
+      socket.off('disconnect');
+      socket.off('pong');
+    };
   }, []);
 
   return (

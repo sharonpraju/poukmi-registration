@@ -1,15 +1,7 @@
 version: '3.8'
 
 services:
-  poumki_db:
-    image: mongo
-    ports:
-      - $MONGODB_MACHINE_PORT:$MONGODB_PORT
-    volumes:
-      - poumki-db-volume:/data/db
   poumki_server:
-    depends_on:
-      - poumki_db
     build: ./app
     restart: unless-stopped
     env_file: ./.env
@@ -21,5 +13,4 @@ services:
       - poumki-server-volume:/app/uploads
 
 volumes: 
-  poumki-db-volume:
   poumki-server-volume:

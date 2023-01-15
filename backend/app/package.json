@@ -9,7 +9,8 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.7.0",
-    "mongoosejs-cli": "^1.0.7"
+    "mongoosejs-cli": "^1.0.7",
+    "socket.io": "^4.5.4"
   },
   "name": "poumki",
   "version": "1.0.0",
