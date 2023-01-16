@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Button from '@mui/material/Button';
+import FormatString from '../../components/FormatString';
+import ListView from '../../components/ListView';
 import io from 'socket.io-client';
 import axios from 'axios';
 
@@ -154,26 +156,12 @@ function Dashboard() {
           </div>
         </div>
         <hr></hr>
-        {
-          users && users.map((obj) => {
-            return (
-              <div className='row p-0 m-0 border-bottom'>
-                <div className="col-6 col-md-4 p-3">
-                  {obj.first_name}
-                </div>
-                <div className="col-6 col-md-4 p-3">
-                  {obj.last_name}
-                </div>
-                <div className="col-12 col-md-4 p-3 d-flex justify-content-end">
-                  <Button variant="contained" color="danger" className="col-12 col-md-2 font-weight-bolder mt-2 text-white" size="large" onClick={() => deleteUser(obj._id)}>Delete</Button>
-                </div>
-              </div>
-            )
-          })
-        }
+        <ListView users={users} deleteUser={deleteUser}></ListView>
         <div className='row p-3 m-0 justify-content-end gap-2'>
-          {(users && users.length > 0) ? <Button variant="contained" color="danger" className="col-12 col-md-2 font-weight-bolder mt-2 text-white" size="large" onClick={() => deleteAll()}>Delete All</Button> : <div className='col-12 text-center'>No Users</div>}
+          {(users && users.length > 0) ? <Button variant="contained" color="danger" className="col-12 col-md-2 font-weight-bolder mt-2 text-white ps-3 pe-3" size="small" onClick={() => deleteAll()}>Delete All</Button> : <div className='col-12 text-center'>No Users</div>}
         </div>
+        <hr></hr>
+        <FormatString></FormatString>
       </div>
     </div>
   )

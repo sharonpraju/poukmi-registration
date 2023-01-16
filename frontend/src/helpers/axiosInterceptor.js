@@ -20,7 +20,7 @@ function AxiosInterceptor() {
         },
         function (error) {
           if (error.response.status === 401) {
-            if(window.location.pathname!='/login')
+            if(window.location.pathname!=='/login')
             {
               window.location.replace('/login');
             }
